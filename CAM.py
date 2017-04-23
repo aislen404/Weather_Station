@@ -11,6 +11,5 @@ class CAM(object):
             time.sleep(0)
             self.camera.stop_preview()
 
-    # getter for pictures
     def get_picture(self, location):
         self.camera.capture(location)

@@ -13,4 +13,5 @@ My IoT Weather Station for Rapsberry Pi.
 - [ ] _**MongoDb**_ : for local/remote no-sql data storage
 - [ ] _**Carriots**_ : for collect data onto [Carriots](http://www.carriots.com) platform
 
+Today starting command in terminal: ``python sensors.py``
 
