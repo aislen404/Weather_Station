@@ -30,7 +30,7 @@ try:
         print (sensor_DTH.get_temperature())
         print (sensor_DTH.get_humidity())
         print (sensor_LDR.get_light())
-        new_picture_location = PICTURE_LOCATION + timestamp + ".jpg"
+        new_picture_location = PICTURE_LOCATION + str(timestamp) + ".jpg"
         sensor_CAM.get_picture(new_picture_location)
         sleep(CYCLE)
 

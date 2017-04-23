@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-
+#more simplistic way
 from gpiozero import LightSensor
 
 class LDR(object):
