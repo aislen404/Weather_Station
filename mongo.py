@@ -12,10 +12,10 @@ class MONGO(object):
         self.db = self.client[DB]
 
     # Function to insert data into mongo db
-    def insert(self, collection,data):
-        cllctn = self.db[collection]
+    def insert(self, collection, data):
+        coleccion = self.db[collection]
         try:
-            cllctn.insert_one(data)
+            coleccion.insert_one(data)
             print '\nInserted data successfully\n'
 
         except Exception, e:

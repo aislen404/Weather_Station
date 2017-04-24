@@ -21,19 +21,21 @@ from json import dumps
 class Client (object):
     api_url = "http://api.carriots.com/streams"
 
-    def __init__(self, api_key=None, client_type='json'):
-        self.client_type = client_type
-        self.api_key = api_key
+    def __init__(self,CLIENTE_TYPE , DEVICE, APIKEY):
+        self.client_type = CLIENTE_TYPE
+        self.api_key = APIKEY
+        self.device = DEVICE
         self.content_type = "application/vnd.carriots.api.v2+%s" % self.client_type
-        self.headers = {'User-Agent': 'Raspberry-Carriots',
-                        'Content-Type': self.content_type,
-                        'Accept': self.content_type,
-                        'Carriots.apikey': self.api_key}
-        self.data = None
+        self.headers = {"User-Agent": "Raspberry-Carriots",
+                        "Content-Type": self.content_type,
+                        "Accept": self.content_type,
+                        "Carriots.apikey": self.api_key}
+        self.data = {"protocol": "v2", "device": self.device}
         self.response = None
 
     def send(self, data):
-        self.data = dumps(data)
+        self.data = dict(data)
         request = Request(Client.api_url, self.data, self.headers)
-        self.response = urlopen(request)
-        return self.response
+        ##self.response = urlopen(request)
+        ##return self.response
+        return request
