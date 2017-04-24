@@ -15,7 +15,8 @@ class MONGO(object):
     def insert(self, collection, data):
         coleccion = self.db[collection]
         try:
-            coleccion.insert_one(data)
+            #coleccion.insert_one(data)
+            print (data)
             print '\nInserted data successfully\n'
 
         except Exception, e:
