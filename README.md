@@ -10,7 +10,7 @@ My IoT Weather Station for Rapsberry Pi.
 - [x] _**CAMERA**_ : Pi Camera V2
 
 ## Services:
-- [ ] _**MongoDb**_ : for local/remote no-sql data storage
+- [X] _**MongoDb**_ : for local/remote no-sql data storage
 - [ ] _**Carriots**_ : for collect data onto [Carriots](http://www.carriots.com) platform
 
 Today starting command in terminal: ``python sensors.py``
