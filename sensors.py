@@ -21,14 +21,14 @@ CYCLE = 5  # seconds for reading
 CYCLE_REPORT = 360  # seconds for uploads
 
 # Now reporting - make the data persistent !!!
-CARRIOTS_APIKEY = "27521767967e8732cfeda31297c32bdc684f843ae141a14b85efed20bbe63234"
-CARRIOTS_DEVICE = "jrdvll_e_w_1@aislen404.aislen404"
+CARRIOTS_APIKEY = ""
+CARRIOTS_DEVICE = ""
 CARRIOTS_CLIENTE_TYPE = "json"
 
-MONGODB_SERVER = "raspberrypi"
+MONGODB_SERVER = "localhost"
 MONGODB_PORT = 27017
-MONGO_DB = "weather_rpi"
-MONGO_COLLECTION = "jrdvll_e_w_1"
+MONGO_DB = ""
+MONGO_COLLECTION = ""
 
 # GPIO SENSORS - Make the magic !!!
 sensor_DTH = DTH11.DTH11(PIN_DHT11)
@@ -36,7 +36,7 @@ sensor_LDR = LDR.LDR(PIN_LDR)
 sensor_CAM = CAM.CAM()
 
 # REPORTING - began to begin
-carriots_STREAM = carriots.Client(CARRIOTS_CLIENTE_TYPE, CARRIOTS_DEVICE, CARRIOTS_APIKEY)
+carriots_STREAM = carriots.Client(CARRIOTS_CLIENTE_TYPE, CARRIOTS_APIKEY)
 mongoDB_REPORT = mongo.MONGO(MONGODB_SERVER, MONGODB_PORT, MONGO_DB)
 
 try:
@@ -45,6 +45,8 @@ try:
         timestamp = utils.now_tuple()
 
         carriots_data = {
+            "protocol": "v2",
+            "device": CARRIOTS_DEVICE,
             "at": timestamp,
             "data": {
                 "TEMPERATURE": sensor_DTH.get_temperature(),

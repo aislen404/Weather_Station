@@ -17,6 +17,6 @@ class MONGO(object):
         try:
             coleccion.insert_one(data)
             print ("Inserted data successfully")
-
-        except Exception (e):
-            print (str(e))
+            self.client.close()
+        except:
+            print ("FALLO EN MONGODB")
