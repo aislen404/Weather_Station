@@ -1,19 +1,4 @@
 #!/usr/bin/python3
-"""
-    Carriots.com
-    Created 11 Jan 2013
-    This sketch sends streams to Carriots according to the values read by a LDR sensor
-
-
-    device = "YOUR DEVICE's ID_DEVELOPER HERE"  # Replace with the id_developer of your device
-    apikey = "YOUR APIKEY HERE"  # Replace with your Carriots apikey
-    
-    client_carriots = Client(apikey)
-    
-    data = {"protocol": "v2", "device": device, "at": timestamp, "data": WHATEVER YOU NEED}
-    
-    client_carriots.send(data)
-"""
 
 from urllib.request import urlopen, Request
 from json import dumps
