@@ -1,4 +1,4 @@
-#-*-coding:utf8-*-
+#!/usr/bin/python3
 """
     Carriots.com
     Created 11 Jan 2013
@@ -15,7 +15,7 @@
     client_carriots.send(data)
 """
 
-from urllib2 import urlopen, Request
+from urllib.request import urlopen, Request
 from json import dumps
 
 class Client (object):

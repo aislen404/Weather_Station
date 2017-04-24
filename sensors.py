@@ -17,17 +17,18 @@ PICTURE_LOCATION = "/home/pi/Desktop/Weather_Station/"
 PIN_DHT11 = 18  # DHT pin - real
 PIN_LDR = 17  # LDR pin - real
 PIN_BPM085 = ["SDA", "SCL"]  # BMP085 pins - only for listing purpose
-CYCLE = 10  # seconds for reading
+CYCLE = 5  # seconds for reading
 CYCLE_REPORT = 360  # seconds for uploads
 
 # Now reporting - make the data persistent !!!
-CARRIOTS_APIKEY = ""
-CARRIOTS_DEVICE = ""
+CARRIOTS_APIKEY = "27521767967e8732cfeda31297c32bdc684f843ae141a14b85efed20bbe63234"
+CARRIOTS_DEVICE = "jrdvll_e_w_1@aislen404.aislen404"
 CARRIOTS_CLIENTE_TYPE = "json"
 
-MONGODB_SERVER = ""
-MONGODB_PORT = ""
-MONGO_DB = ""
+MONGODB_SERVER = "raspberrypi"
+MONGODB_PORT = 27017
+MONGO_DB = "weather_rpi"
+MONGO_COLLECTION = "jrdvll_e_w_1"
 
 # GPIO SENSORS - Make the magic !!!
 sensor_DTH = DTH11.DTH11(PIN_DHT11)
@@ -51,16 +52,14 @@ try:
                 "LDR": sensor_LDR.get_light()}
             }
 
-        print (utils.now())
-
-        print carriots_data
+        print (carriots_data)
 
         print(carriots_STREAM.send(carriots_data))  # Post to CARRIOTS data stream
 
-        mongoDB_REPORT.insert(CARRIOTS_DEVICE, carriots_data)  # Insert on to MongoDB
+        mongoDB_REPORT.insert(MONGO_COLLECTION, carriots_data)  # Insert on to MongoDB
 
         # Take the picture
-        new_picture_location = PICTURE_LOCATION + timestamp + ".jpg"
+        new_picture_location = PICTURE_LOCATION + str(timestamp) + ".jpg"
         sensor_CAM.get_picture(new_picture_location)
 
         sleep(CYCLE)  # Now Wait till next data adquisition cycle

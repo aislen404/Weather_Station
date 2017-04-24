@@ -17,7 +17,7 @@ class LDR(object):
         # Output on the pin for
         GPIO.setup(self.pin, GPIO.OUT)
         GPIO.output(self.pin, GPIO.LOW)
-        time.sleep(0.1)
+        time.sleep(1)
 
         # Change the pin back to input
         GPIO.setup(self.pin, GPIO.IN)
