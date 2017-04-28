@@ -11,7 +11,7 @@ class MONGO(object):
         self.client = MongoClient(self._server, self._port)
         self.db = self.client[DB]
 
-    # Function to insert data into mongo db
+    # Function to insert data into Mongo db
     def insert(self, collection, data):
         coleccion = self.db[collection]
         try:
