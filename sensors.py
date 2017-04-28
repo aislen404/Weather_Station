@@ -21,14 +21,14 @@ CYCLE = 5  # seconds for reading
 CYCLE_REPORT = 360  # seconds for uploads
 
 # Now reporting - make the data persistent !!!
-CARRIOTS_APIKEY = ""
-CARRIOTS_DEVICE = ""
+CARRIOTS_APIKEY = "9f360db18ea03993415f0ff8e77c42c89b1b7d2656fc75cfa504a9db7b86d84e"
+CARRIOTS_DEVICE = "jrdvll_e_w_1@aislen404.aislen404"
 CARRIOTS_CLIENTE_TYPE = "json"
 
 MONGODB_SERVER = "localhost"
 MONGODB_PORT = 27017
-MONGO_DB = ""
-MONGO_COLLECTION = ""
+MONGO_DB = "weahter_rpi"
+MONGO_COLLECTION = "jrdvll_e_w_1"
 
 # GPIO SENSORS - Make the magic !!!
 sensor_DTH = DTH11.DTH11(PIN_DHT11)
@@ -46,15 +46,15 @@ try:
 
         carriots_data = {
             "protocol": "v2",
-            "device": CARRIOTS_DEVICE,
+            "checksum": "",
             "at": timestamp,
+            "device": CARRIOTS_DEVICE,
             "data": {
                 "TEMPERATURE": sensor_DTH.get_temperature(),
                 "HUMIDITY": sensor_DTH.get_humidity(),
-                "LDR": sensor_LDR.get_light()}
+                "LDR": sensor_LDR.get_light()
+                }
             }
-
-        print (carriots_data)
 
         print(carriots_STREAM.send(carriots_data))  # Post to CARRIOTS data stream
 

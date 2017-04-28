@@ -18,8 +18,20 @@ class Client (object):
         self.response = None
 
     def send(self, data):
-        self.data = dumps(data)
-        request = Request(Client.api_url, self.data, self.headers)
+        print(data)
+        self.data = data
+        mierda = {
+    "protocol": "v2",
+    "checksum": "",
+    "device": "jrdvll_e_w_1@aislen404.aislen404",
+    "at": "now",
+    "data": {
+        "LDR": 4,
+        "TEMPERATURE": 22,
+        "HUMIDITY": 35
+    }
+}
+        request = Request(Client.api_url, dumps(mierda), self.headers)
         self.response = urlopen(request)
         return self.response
 
