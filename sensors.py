@@ -18,7 +18,7 @@ PIN_DHT11 = 18  # DHT pin - real
 PIN_LDR = 17  # LDR pin - real
 PIN_BPM085 = ["SDA", "SCL"]  # BMP085 pins - only for listing purpose
 CYCLE = 5  # seconds for reading
-CYCLE_REPORT = 360  # seconds for uploads
+CYCLE_REPORT = 300  # seconds for uploads , max 500 streams per day
 
 # Now reporting - make the data persistent !!!
 CARRIOTS_APIKEY = "9f360db18ea03993415f0ff8e77c42c89b1b7d2656fc75cfa504a9db7b86d84e"
@@ -52,19 +52,27 @@ try:
             "data": {
                 "TEMPERATURE": sensor_DTH.get_temperature(),
                 "HUMIDITY": sensor_DTH.get_humidity(),
-                "LDR": sensor_LDR.get_light()
+                "LDR": sensor_LDR.get_light_old()
                 }
             }
 
+        mongo_data = {
+            "at": timestamp,
+            "device": CARRIOTS_DEVICE,
+            "TEMPERATURE": sensor_DTH.get_temperature(),
+            "HUMIDITY": sensor_DTH.get_humidity(),
+            "LDR": sensor_LDR.get_light_old()
+            }
+        
         print(carriots_STREAM.send(carriots_data))  # Post to CARRIOTS data stream
 
-        mongoDB_REPORT.insert(MONGO_COLLECTION, carriots_data)  # Insert on to MongoDB
+        mongoDB_REPORT.insert(MONGO_COLLECTION, mongo_data)  # Insert on to MongoDB
 
         # Take the picture
         new_picture_location = PICTURE_LOCATION + str(timestamp) + ".jpg"
         sensor_CAM.get_picture(new_picture_location)
 
-        sleep(CYCLE)  # Now Wait till next data adquisition cycle
+        sleep(CYCLE_REPORT)  # Now Wait till next data adquisition cycle
 
 except KeyboardInterrupt:
     print ("finito")
