@@ -27,7 +27,7 @@ CARRIOTS_CLIENTE_TYPE = "json"
 
 MONGODB_SERVER = "localhost"
 MONGODB_PORT = 27017
-MONGO_DB = "weahter_rpi"
+MONGO_DB = "weather_rpi"
 MONGO_COLLECTION = "jrdvll_e_w_1"
 
 # GPIO SENSORS - Make the magic !!!
