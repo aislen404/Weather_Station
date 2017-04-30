@@ -3,7 +3,7 @@
 import DTH11
 import LDR
 import CAM
-import BMP085
+import BMP085_S
 import carriots
 import mongo
 import utils
@@ -31,9 +31,10 @@ MONGO_DB = "weather_rpi"
 MONGO_COLLECTION = "jrdvll_e_w_1"
 
 # GPIO SENSORS - Make the magic !!!
-sensor_DTH = DTH11.DTH11(PIN_DHT11)
-sensor_LDR = LDR.LDR(PIN_LDR)
+#sensor_DTH = DTH11.DTH11(PIN_DHT11)
+#sensor_LDR = LDR.LDR(PIN_LDR)
 sensor_CAM = CAM.CAM()
+sensor_BMP = BMP085_S.BMP085_S()
 
 # REPORTING - began to begin
 carriots_STREAM = carriots.Client(CARRIOTS_CLIENTE_TYPE, CARRIOTS_APIKEY)
@@ -50,23 +51,29 @@ try:
             "at": timestamp,
             "device": CARRIOTS_DEVICE,
             "data": {
-                "TEMPERATURE": sensor_DTH.get_temperature(),
-                "HUMIDITY": sensor_DTH.get_humidity(),
-                "LDR": sensor_LDR.get_light_old()
+                "TEMPERATURE": "" ,# sensor_DTH.get_temperature(),
+                "HUMIDITY": "" ,# sensor_DTH.get_humidity(),
+                "LDR": "" # sensor_LDR.get_light_old()
                 }
             }
 
         mongo_data = {
             "at": timestamp,
             "device": CARRIOTS_DEVICE,
-            "TEMPERATURE": sensor_DTH.get_temperature(),
-            "HUMIDITY": sensor_DTH.get_humidity(),
-            "LDR": sensor_LDR.get_light_old()
+            "TEMPERATURE": "" ,# sensor_DTH.get_temperature(),
+            "TEMPERATURE_2":sensor_BMP.get_temperature(),          
+            "PRESSURE": sensor_BMP.get_pressure(),
+            "PRESSURE_SEA_LEVEL":sensor_BMP.get_sealevel(),            
+            "HUMIDITY": "" ,#sensor_DTH.get_humidity(),
+            "LDR": "" ,#sensor_LDR.get_light_old(),
+            "ALTITUDE":sensor_BMP.get_altitude()
             }
-        
-        print(carriots_STREAM.send(carriots_data))  # Post to CARRIOTS data stream
 
-        mongoDB_REPORT.insert(MONGO_COLLECTION, mongo_data)  # Insert on to MongoDB
+        print(mongo_data)
+        
+        #print(carriots_STREAM.send(carriots_data))  # Post to CARRIOTS data stream
+
+        #mongoDB_REPORT.insert(MONGO_COLLECTION, mongo_data)  # Insert on to MongoDB
 
         # Take the picture
         new_picture_location = PICTURE_LOCATION + str(timestamp) + ".jpg"
