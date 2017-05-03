@@ -20,7 +20,7 @@ PIN_DHT11 = 18  # DHT pin - real
 PIN_LDR = 17  # LDR pin - real
 PIN_BPM085 = ["SDA", "SCL"]  # BMP085 pins - only for listing purpose
 CYCLE = 5  # seconds for reading
-CYCLE_REPORT = 300  # seconds for uploads , max 500 streams per day
+CYCLE_REPORT = 200  # seconds for uploads , max 500 streams per day
 
 # PARAMETERS FOR REPORTING
 CARRIOTS_APIKEY = "9f360db18ea03993415f0ff8e77c42c89b1b7d2656fc75cfa504a9db7b86d84e"
@@ -35,7 +35,7 @@ MONGO_COLLECTION = "jrdvll_e_w_1"
 # GPIO SENSORS
 sensor_DTH = DTH11.DTH11(PIN_DHT11)
 sensor_LDR = LDR.LDR(PIN_LDR)
-sensor_CAM = CAM.CAM()
+# sensor_CAM = CAM.CAM()
 sensor_BMP = BMP085_S.BMP085_S()
 
 # REPORTING
@@ -44,6 +44,7 @@ mongoDB_REPORT = mongo.MONGO(MONGODB_SERVER, MONGODB_PORT, MONGO_DB) # TO MongoD
 
 try:
     while True:
+        print("Another messureament")
         # getting the TIMESTAMP
         timestamp = utils.now_tuple()
 
@@ -86,8 +87,8 @@ try:
         print(mongoDB_REPORT.insert(MONGO_COLLECTION, mongo_data))  # Insert on to MongoDB
 
         # PICTURES
-        new_picture_location = PICTURE_LOCATION + str(timestamp) + ".jpg"  # new file with the timeStamp
-        sensor_CAM.get_picture(new_picture_location)  # Take the picture
+        # new_picture_location = PICTURE_LOCATION + str(timestamp) + ".jpg"  # new file with the timeStamp
+        # sensor_CAM.get_picture(new_picture_location)  # Take the picture
 
         # Now WAIT till next data adquisition cycle
         sleep(CYCLE_REPORT)

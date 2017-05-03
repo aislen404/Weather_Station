@@ -12,7 +12,9 @@ class DTH11(object):
         self.humidity, self.temperature = Adafruit_DHT.read_retry(self.sensor, self.pin)
 
     def get_temperature(self):
+        self.humidity, self.temperature = Adafruit_DHT.read_retry(self.sensor, self.pin)
         return self.temperature
 
     def get_humidity(self):
+        self.humidity, self.temperature = Adafruit_DHT.read_retry(self.sensor, self.pin)
         return self.humidity

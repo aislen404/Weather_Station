@@ -18,6 +18,7 @@ class LDR(object):
         count = 0
 
         # Output on the pin for
+        GPIO.setmode(GPIO.BCM)
         GPIO.setup(self.pin, GPIO.OUT)
         GPIO.output(self.pin, GPIO.LOW)
         time.sleep(1)
