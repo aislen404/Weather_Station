@@ -1,8 +1,3 @@
-https://hackernoon.com/how-to-use-javascript-libraries-in-angular-2-apps-ff274ba601af
-https://www.jvandemo.com/how-to-properly-integrate-non-angularjs-libraries-in-your-angularjs-application/
-
-
-
 function createCookie(a, b, c) {
     if (c) {
         var d = new Date;
